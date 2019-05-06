@@ -1,0 +1,27 @@
+.weatherList {
+
+  &__days-table {
+    color: blue;
+    padding-top: 10vh;
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__block:not(:first-child):not(:last-child) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 20px;
+  }
+  &__block:first-child {
+    padding-left: 80px;
+  }
+  &__block:last-child {
+    padding-left: 20px;
+    padding-right: 80px;
+  }
+}
+
