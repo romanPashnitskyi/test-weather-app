@@ -9,7 +9,8 @@ class App extends Component {
         super();
         this.state = {
             city: null,
-            list: null
+            list: null,
+            units: null
         };
     }
 
@@ -34,33 +35,20 @@ class App extends Component {
     }
 
     weatherApiRequest = (location) => {
-        const API_KEY = "88b02751c8e68dbd9f16f1ec44a95838";
+        const API_KEY = "bd2ae3f21976f0f86cc5e88e358b72bd";
         const units = this.props.history.location.state === undefined
-                ? 'metric'
-                : this.props.history.location.state.isChecked;
+            ? 'metric'
+            : this.props.history.location.state.isChecked;
         const { latitude, longitude } = location || {};
-        const URL = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${units}&appid=${API_KEY}`;
+        const URL = `http://api.openweathermap.org/data/2.5/forecast/daily?lat=${latitude}&lon=${longitude}&units=${units}&cnt=16&APPID=${API_KEY}`;
 
         fetch(URL)
             .then(response => response.json())
             .then((data) => {
-                let processedList = [];
-                for (let item of data.list) {
-                    const aDate = item.dt_txt.split(' ');
-                    if (!processedList[aDate[0]]) {
-                        processedList[aDate[0]] = [];
-                    }
-                    processedList[aDate[0]].push({
-                        hour: aDate[1].substr(0, 5),
-                        temp: item.main.temp,
-                        icon: `https://openweathermap.org/img/w/${item.weather[0].icon}.png`,
-                        description: item.weather[0].description,
-                        units: units
-                    })
-                }
                 this.setState({
-                    list: processedList,
+                    list: data.list,
                     city: data.city.name,
+                    units: units
                 });
             })
     };
@@ -72,7 +60,10 @@ class App extends Component {
                     <div className='app__title'>
                         <Title city={this.state.city}/>
                     </div>
-                    <WeatherList list={this.state.list}/>
+                    <WeatherList
+                        list={this.state.list}
+                        units={this.state.units}
+                    />
                 </div>
             )
         )

@@ -8,8 +8,8 @@ class WeatherList extends Component {
         const weatherElements = Object.keys(this.props.list).map((date, index) =>
             <div key={date} className='weatherList__block'>
                 <Weather
-                         day={date}
                          list={this.props.list[date]}
+                         units={this.props.units}
                 />
             </div>
         );
