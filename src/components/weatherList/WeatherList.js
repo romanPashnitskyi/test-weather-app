@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './WeatherList.scss';
-import Weather from "../weather/Weather";
+import Weather from '../weather/Weather';
 
 class WeatherList extends Component {
     render() {
@@ -8,8 +8,8 @@ class WeatherList extends Component {
         const weatherElements = Object.keys(this.props.list).map((date, index) =>
             <div key={date} className='weatherList__block'>
                 <Weather
-                         list={this.props.list[date]}
-                         units={this.props.units}
+                    list={this.props.list[date]}
+                    units={this.props.units}
                 />
             </div>
         );

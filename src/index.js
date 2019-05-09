@@ -1,27 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route } from "react-router-dom";
-import App from './App';
-import Settings from './components/settings/Settings';
+import { Provider } from 'react-redux';
+import { Router, Route } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { createBrowserHistory } from 'history';
+import store from './store';
+import App from './containers/App';
+import Settings from './containers/settings/Settings';
 import 'font-awesome/css/font-awesome.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
-import * as serviceWorker from './serviceWorker';
-import { createBrowserHistory } from "history";
 
+const history = syncHistoryWithStore(createBrowserHistory(), store);
 
-const history = createBrowserHistory();
+ReactDOM.render(
+    <Provider store={store}>
+        <Router history={history}>
+            <Route exact path="/" component={App} />
+            <Route path="/settings" component={Settings} />
+        </Router>
+    </Provider>, document.getElementById('root'));
 
-const routing =(
-    <Router history={history}>
-        <Route exact path="/" component={App} />
-        <Route path="/settings/" component={Settings} />
-    </Router>
-);
-
-
-ReactDOM.render(routing, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

@@ -13,7 +13,7 @@ class Weather extends Component {
             <div className='weather__days-of-week'>
                 <div className='weather__top'>
                     <div className='weather__temp'>
-                        {list.temp.day}{units === 'metric' ? '°C' : '°F'}
+                        {list.temp.day.toFixed(0)}{units === false ? '°C' : '°F'}
                     </div>
                     <div className='weather__description'>
                         {list.weather[0].description.charAt(0).toUpperCase() + list.weather[0].description.slice(1)}

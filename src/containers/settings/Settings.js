@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
+import {checkboxHandler} from './../../actions/settingsAction';
 import './Settings.scss';
 
 class Settings extends Component {
 
-    state = {
-        isChecked: false
+    unitsConvertor = () => {
+        this.props.history.push('/');
     };
 
     render() {
@@ -13,10 +16,10 @@ class Settings extends Component {
                 <h2 className='settings__subtitle'>Units</h2>
                 <label className='toggle-label'>
                     <input type='checkbox'
-                           checked={ this.state.isChecked}
-                           onChange={ this.checkboxHandler.bind(this)}
+                           checked={ this.props.settings.isChecked }
+                           onChange={ () => this.props.checkboxHandler(this.props.settings.isChecked)}
                            className='inp-check'
-                           />
+                    />
                     <span className='back'>
                     <span className='toggle'></span>
                         <span className='label on'>C</span>
@@ -33,17 +36,20 @@ class Settings extends Component {
         );
     }
 
-    unitsConvertor = () => {
-        this.props.history.push('/', {
-            isChecked : this.state.isChecked === false ? 'metric' : 'imperial'
-        });
-    };
-
-    checkboxHandler() {
-        this.setState({
-            isChecked: !this.state.isChecked
-        });
-    }
 }
 
-export default Settings;
+const mapStateToProps = (state) => {
+    return {
+        settings: state.settings
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        checkboxHandler: (isChecked) => {
+            dispatch(checkboxHandler(isChecked))
+        }
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Settings);
