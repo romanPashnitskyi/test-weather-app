@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {fetchData} from '../actions/appAction';
-import Title from './../components/title/Title';
-import WeatherList from '../components/weatherList/WeatherList';
+import {fetchData} from '../../actions/appAction';
+import Title from '../../components/title/Title';
+import WeatherList from '../../components/weatherList/WeatherList';
 import './App.scss';
 
 class App extends Component {
