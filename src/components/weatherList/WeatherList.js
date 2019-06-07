@@ -5,10 +5,10 @@ import Weather from '../weather/Weather';
 class WeatherList extends Component {
     render() {
 
-        const weatherElements = Object.keys(this.props.list).map((date, index) =>
-            <div key={date} className='weatherList__block'>
+        const weatherElements = this.props.list.map((date, index) =>
+            <div key={index} className='weatherList__block'>
                 <Weather
-                    list={this.props.list[date]}
+                    list={this.props.list[index]}
                     units={this.props.units}
                 />
             </div>
