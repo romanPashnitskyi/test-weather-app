@@ -5,7 +5,7 @@ import { Router, Route } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { createBrowserHistory } from 'history';
 import store from './store';
-import App from './containers/App';
+import App from './containers/app/App';
 import Settings from './containers/settings/Settings';
 import 'font-awesome/css/font-awesome.min.css';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
